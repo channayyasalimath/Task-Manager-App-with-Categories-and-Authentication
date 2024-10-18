@@ -1,11 +1,14 @@
 import React from 'react';
 import {Container,Form,Nav,Navbar,NavDropdown} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
     <Navbar expand="lg" bg='primary' variant='dark'>
       <Container>
-        <Navbar.Brand href="/">Task Manager</Navbar.Brand>
+        <Navbar.Brand>
+            <Link to="/">Task Manager</Link>
+            </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
 
@@ -21,7 +24,9 @@ const Header = () => {
           </Form>
             </Nav>
           <Nav>
-            <Nav.Link href="#action1">My Tasks</Nav.Link>
+            <Nav.Link href="/tasks">
+                <Link to="/tasks">My Tasks</Link>
+            </Nav.Link>
             
             <NavDropdown title="Channayya" id="navbarScrollingDropdown">
               
