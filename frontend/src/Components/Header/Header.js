@@ -1,8 +1,22 @@
+import axios from 'axios';
 import React from 'react';
 import {Container,Form,Nav,Navbar,NavDropdown} from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
+
+  const navigate= useNavigate()
+  const handleLogout = () => {
+    axios.post('/api/users/logout')
+      .then(res => {
+        
+        localStorage.removeItem('userInfo');
+        navigate('/');
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
   return (
     <Navbar expand="lg" bg='primary' variant='dark'>
       <Container>
@@ -34,7 +48,7 @@ const Header = () => {
                 My Profile
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">
+              <NavDropdown.Item onClick={handleLogout}>
                 Log Out
               </NavDropdown.Item>
             </NavDropdown>

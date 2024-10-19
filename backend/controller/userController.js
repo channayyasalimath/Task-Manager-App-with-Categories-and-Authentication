@@ -1,5 +1,6 @@
 const asyncHandler=require("express-async-handler");
 const User=require("../models/userModel");
+const generateToken = require("../utils/generateToken");
 
 
 
@@ -28,6 +29,7 @@ const registerUser=asyncHandler(async(req,res)=>{
         password:user.password,
         isAdmin:user.isAdmin,
         pic:user.pic,
+        token:generateToken(user._id),
     })
   }else{
     res.status(400);
@@ -50,6 +52,7 @@ const loginUser=asyncHandler(async(req,res)=>{
         password:user.password,
         isAdmin:user.isAdmin,
         pic:user.pic,
+        token:generateToken(user._id),
         })
     }else{
         res.status(400);
@@ -60,4 +63,11 @@ const loginUser=asyncHandler(async(req,res)=>{
   }
   )
 
-module.exports={registerUser, loginUser}
+
+  const logoutUser = asyncHandler(async (req, res) => {
+    res.status(200).json({ message: "User logged out successfully" });
+  });
+
+  
+
+module.exports={registerUser, loginUser, logoutUser}
