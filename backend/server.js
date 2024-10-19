@@ -2,8 +2,12 @@ const express = require('express')
 const dotenv=require('dotenv')
 const tasks = require('./data/tasks')
 
+const connectDB = require('./config/db')
+
 const app = express()
 dotenv.config()
+
+connectDB();
 
 
 app.get('/',  (req, res)=> {
