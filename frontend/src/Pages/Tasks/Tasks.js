@@ -74,19 +74,32 @@
 
 
 
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import MainScreen from "../../Components/MainScreen";
 import { Link } from "react-router-dom";
 import { Accordion, Badge, Button } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-import tasks from "../../data/tasks";
+
 
 const Tasks = () => {
+    const [tasks,setTasks] =useState([]);
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure?")) {
       // Handle delete logic
     }
   };
+
+  const fetchTasks=async()=>{
+    const {data}= await axios.get("/api/tasks")
+
+    setTasks(data);
+  }
+  console.log(tasks);
+
+  useEffect(()=>{
+    fetchTasks()
+  },[])
 
   return (
     <MainScreen title="Welcome back Channayya...">
